@@ -71,12 +71,7 @@ To get the best experience, you should install specific extensions in VS Code.
 *   **[Open In External App](https://marketplace.visualstudio.com/items?itemName=djunh1.open-in-external-app)** (`djunh1.open-in-external-app`): Allows opening test result `.webm` movies in VLC Media Player directly from VS Code.
 *   **[GitHub Copilot Chat](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot-chat)** (`GitHub.copilot-chat`): AI setup companion (may be installed already).
 
-### Configuring MCP Servers
 
-If you do not see the **MCP-Servers** section at the bottom of the Extensions view or the **Playwright MCP Server** is missing:
-
-1. Install **playwright-mcp** (The official Playwright MCP Server).
-2. Visit [https://github.com/microsoft/playwright-mcp](https://github.com/microsoft/playwright-mcp) and click the link to install it into VS Code.
 
 ## 3. Clone and Initialize the Repository
 
