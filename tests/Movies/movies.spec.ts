@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { addTextToVideo } from '../../utilities/utils.js';
-import { Credentials } from '../../utilities/credentials.js';
+import { getUser } from '../../utilities/users.js';
 
 test('homepage shows popular movies', async ({ page }) => {
   await page.goto('https://debs-obrien.github.io/playwright-movies-app');

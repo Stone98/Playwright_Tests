@@ -13,9 +13,18 @@ LocalTests*/
 # Logs
 *.log
 
-# Credentials
+# Ignore all environment files containing secrets
+*.env
+.env.*
+
+# IF you happen to do a Typescript Build (which is not needed for Playwright tests) ignore the resulting .js files
+#Ignore all .js files in the utilities folder
+utilities/*.js
+#Ignore all .js files in the tests folder
+tests/**/*.js
+#Ingnore playright.config.js
+playwright.config.js
+
+
+
 credentials.ts
-credentials.js
-
-
-

@@ -85,5 +85,43 @@ To get the best experience, you should install specific extensions in VS Code.
 
 ## 4. Environment Setup
 
-Locate the `utilities` folder in the file explorer.
-Follow the instructions in the [utilities/credentials.readme.md](utilities/credentials.readme.md) file to set up necessary credentials.
+### 4.1 Local Environment Setup
+
+To run tests locally, you need to configure your user credentials.
+
+1.  Create a file named `users.env` in the root of the project (if it doesn't already exist).
+2.  Add the following variables to `users.env`. You can copy this template:
+
+    ```env
+    LOGINS_GUEST_LOGIN=GUEST_Login
+    LOGINS_GUEST_PASSWORD=GUEST_Password
+    LOGINS_GUEST_BASEURL=https://example.com
+
+    LOGINS_ADMIN_LOGIN=ADMIN_Login
+    LOGINS_ADMIN_PASSWORD=ADMIN_Password
+    LOGINS_ADMIN_BASEURL=https://example.com
+
+    LOGINS_SUPERUSER_LOGIN=SU_Login
+    LOGINS_SUPERUSER_PASSWORD=SU_Password
+    LOGINS_SUPERUSER_BASEURL=https://example.com
+    ```
+
+    *Note: Replace the values with your actual test credentials.*
+
+### 4.2 GitHub Actions (CI/CD) Setup
+
+For the tests to run successfully in GitHub Actions, you must set up **Repository Secrets** so the workflow can access these values securely.
+
+1.  Go to your GitHub repository.
+2.  Navigate to **Settings** > **Secrets and variables** > **Actions**.
+3.  Click **New repository secret**.
+4.  For each of your users, Add each of the following secrets (names must match exactly):
+
+    *   `LOGINS_GUEST_LOGIN`
+    *   `LOGINS_GUEST_PASSWORD`
+    *   `LOGINS_GUEST_BASEURL`
+
+The `.github/workflows/playwright.yml` file has been configured to map these secrets to the environment variables required by the tests.
+
+
+

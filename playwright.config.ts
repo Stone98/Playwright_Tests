@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
-
+// Check if the CI environment variable is set
+const isCI = process.env.CI === 'true' || process.env.CI === '1';
 /**
  * Read environment variables from file.
  * https://github.com/motdotla/dotenv
@@ -16,11 +17,11 @@ export default defineConfig({
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  forbidOnly: !!isCI,
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: isCI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: isCI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -28,10 +29,10 @@ export default defineConfig({
     /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: '',
     ignoreHTTPSErrors: true, // This ignores SSL errors globally
-    headless: false, // Run tests in headed mode so you can see them running
+    headless: isCI ? true : false, // Run tests in headed mode locally so you can see them running
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    video: 'on',
+    video: isCI ? 'off' : 'on', // Record video only when not in CI
     screenshot: 'only-on-failure',
   },
 
@@ -41,17 +42,18 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+  
+    /* Test against other browsers. */
+    //{
+    //  name: 'firefox',
+    //  use: { ...devices['Desktop Firefox'] },
+    //},
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
-
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
-
+    //{
+    //  name: 'webkit',
+    //  use: { ...devices['Desktop Safari'] },
+    //},
+  
     /* Test against mobile viewports. */
     // {
     //   name: 'Mobile Chrome',
