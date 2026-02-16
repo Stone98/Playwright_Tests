@@ -3,7 +3,7 @@ import { Page } from '@playwright/test';
 export async function addTextToVideo(page: Page, text: string, waitDuration: number = 1000) {
   const path = await page.video()?.path();
   if (path) {
-    console.log('Video recording is on:' + text);
+    console.log(text);
     await page.evaluate((txt) => {
       let div = document.getElementById('debug-overlay');
       if (!div) {
@@ -26,7 +26,7 @@ export async function addTextToVideo(page: Page, text: string, waitDuration: num
     }
   }
   else{
-    console.log('Video recording is off:' + text);
+    console.log(text);
     //if we don't wait the same duration then our tests might only pass when video recording is on, which is not what we want. We want the tests to pass regardless of the video recording status.
     if (waitDuration > 0) {
       await page.waitForTimeout(waitDuration);

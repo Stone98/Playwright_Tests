@@ -82,6 +82,12 @@ To get the best experience, you should install specific extensions in VS Code.
    npm install
    npx playwright install
    ```
+4. Setup Playwright agent by  running this command
+   ```powershell
+   npx playwright init-agents --loop=vscode
+   ```
+
+
 
 ## 4. Environment Setup
 
