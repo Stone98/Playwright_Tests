@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { Page, test, expect } from '@playwright/test';
+import { addTextToVideo } from '../utilities/utils.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -9,6 +11,14 @@ const __dirname = path.dirname(__filename);
 // In CI, we expect environment variables to be set directly
 if (!process.env.CI) {
   dotenv.config({ path: path.resolve(__dirname, '../users.env') });
+}
+
+export async function loginUser(page: Page, myUser: User) {
+    await page.goto(myUser.baseUrl);
+    await addTextToVideo(page, 'Logging in as ' + myUser.loginName);
+    const adminRole = page.getByText(myUser.loginName + ' Role').first();//Get a user with the admin role
+    //this element's next sibling is the anchor we want to click, so we use .locator() to find it and click it
+    await adminRole.locator('xpath=following-sibling::a').click();
 }
 
 export interface User {
